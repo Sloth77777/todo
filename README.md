@@ -21,7 +21,6 @@ docker compose exec app bash
 ``` bash
 php artisan key:generate
 php artisan session:table
-php artisan queue:table
 php artisan migrate
 ```
 Доступ
