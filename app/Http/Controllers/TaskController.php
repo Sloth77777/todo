@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\TaskStoreOrUpdateRequest;
+use App\Http\Requests\TaskStoreRequest;
+use App\Http\Requests\TaskUpdateRequest;
 use App\Http\Service\TaskService;
 use App\Models\Task;
 use App\Traits\hasErrorTrait;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class TaskController extends Controller
@@ -26,22 +26,15 @@ class TaskController extends Controller
     {
         $tasks = Task::query()->paginate(10)->withQueryString();
 
-        return view('tasks.index', ['tasks' => $tasks]);
+        return view('index', ['tasks' => $tasks]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create():View
-    {
-        return view('tasks.create');
-    }
 
     /**
      * Store a newly created resource in storage.
      * @throws \Exception
      */
-    public function store(TaskStoreOrUpdateRequest $request): RedirectResponse
+    public function store(TaskStoreRequest $request): RedirectResponse
     {
         $task = $this->taskService->store($request->toDto());
 
@@ -57,7 +50,7 @@ class TaskController extends Controller
      */
     public function show(Task $task):View
     {
-        return view('tasks.show', ['task' => $task])->with('task', $task);
+        return view('show', ['task' => $task])->with('task', $task);
     }
 
     /**
@@ -65,13 +58,13 @@ class TaskController extends Controller
      */
     public function edit(Task $task):View
     {
-        return view('tasks.edit', ['task' => $task])->with('task', $task);
+        return view('edit', ['task' => $task])->with('task', $task);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Task $task): RedirectResponse
+    public function update(TaskUpdateRequest $request, Task $task): RedirectResponse
     {
         $taskUpdate = $this->taskService->update($request->toDto(),$task);
 

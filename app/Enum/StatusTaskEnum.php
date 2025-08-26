@@ -8,4 +8,5 @@ enum StatusTaskEnum: string
 {
     case PENDING = 'pending';
     case DONE = 'done';
+
 }

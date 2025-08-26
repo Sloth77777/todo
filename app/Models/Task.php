@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enum\StatusTaskEnum;
 use App\Traits\hasErrorTrait;
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,4 +15,8 @@ class Task extends Model
         'title',
         'status',
     ];
+    protected $casts = [
+        'status' => StatusTaskEnum::class,
+    ];
+
 }
