@@ -20,7 +20,6 @@ docker compose exec app bash
 1. Ініціалізуйте застосунок і БД:
 ``` bash
 php artisan key:generate
-php artisan session:table
 php artisan migrate
 ```
 Доступ
